@@ -18,6 +18,11 @@ mongoose.set("strictQuery", false);
 // app.use(logger);
 
 app.use(express.json());
+app.get('/',(req,res)=>{
+    res.json({
+        msg:"welcome expense tracker api"
+    })
+})
 
 //datrabase connection
 dbConnect();
