@@ -6,6 +6,8 @@ const { notfound } = require("./middleware/notFound");
 
 const app = express();
 const userRoute = require("./routes/users/usersRoute");
+const incomeRoute = require("./routes/income/incomeRoute");
+const expenseRoute = require("./routes/expenses/expenseRoute")
 
 mongoose.set("strictQuery", false);
 
@@ -28,8 +30,14 @@ app.get('/',(req,res)=>{
 //datrabase connection
 dbConnect();
 
-//routes
+//users routes
 app.use("/api/users", userRoute);
+
+//income route
+app.use('/api/income',incomeRoute)
+
+//expense route
+app.use('/api/expense',expenseRoute)
 
 //error
 app.use(notfound);

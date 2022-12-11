@@ -7,6 +7,10 @@ const userSchema = mongoose.Schema(
       required: [true, "first name is required"],
       type: String,
     },
+    lastname: {
+      required: [true, "last name is required"],
+      type: String,
+    },
     email: {
       required: [true, "email is required"],
       type: String,
@@ -33,10 +37,18 @@ userSchema.pre('save',async function(next){
     next();
 })
 
+//verifying and matching the password by dcrypting it
+userSchema.methods.isPasswordMatch =  async function(enteredPassword){
+  return await bcrypt.compare(enteredPassword,this.password);
+};
+
 //compile scheme to model
 const User = mongoose.model("User", userSchema);
 module.exports = User;
 
 
-//the userSchema.pre will be called before the schema is compiled 
+
+//----useful--comments---
+//the userSchema.pre will be called before the schema is compiled
+//the hash password block will hash the by using bcrypt for security purpose. 
 //i.e before const User
