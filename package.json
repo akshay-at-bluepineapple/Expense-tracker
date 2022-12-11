@@ -4,7 +4,7 @@
   "description": "expense tracker",
   "main": "server.js",
   "engines": {
-    "node": "14.x"
+    "node": "v16.16.0"
   },
   "scripts": {
     "start": "node src/server.js",
