@@ -19,8 +19,12 @@ const createExpCtrl = expressAsyncHandler(async (req, res) => {
 
 //fetch all expense
 const fetchExpCtrl = expressAsyncHandler(async (req, res) => {
+  const { page } = req.query; //taking page number as a query parameter i.e anything after ? =>api/income?page=3
   try {
-    const expense = await Expense.find({});
+    const expense = await Expense.paginate(
+      {},
+      { limit: 10, page: Number(page), populate: "user" } //here populate field will return details of user who has created the expense
+    );
     res.json(expense);
   } catch (error) {
     res.json(error);

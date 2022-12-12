@@ -6,13 +6,18 @@ const {
   updataIncCtrl,
   deleteIncCtrl,
 } = require("../../controllers/income/incomeCtrl");
+const authMiddleware = require("../../middleware/authMiddleware");
 
 const incomeRoute = express.Router();
 
-incomeRoute.post("/", createIncCtrl);
-incomeRoute.get("/", fetchIncCtrl);
-incomeRoute.get("/:id", fetchIncByIdCtrl);
-incomeRoute.put("/:id", updataIncCtrl);
-incomeRoute.delete("/:id", deleteIncCtrl);
+incomeRoute.post("/", authMiddleware, createIncCtrl);
+incomeRoute.get("/", authMiddleware, fetchIncCtrl);
+incomeRoute.get("/:id", authMiddleware, fetchIncByIdCtrl);
+incomeRoute.put("/:id", authMiddleware, updataIncCtrl);
+incomeRoute.delete("/:id", authMiddleware, deleteIncCtrl);
 
 module.exports = incomeRoute;
+
+//--imp notes
+//the authmiddleware passed simply means that before creating a income the user should be authorised 
+//and also logged in 

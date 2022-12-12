@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 //schema
 const expenseSchema = mongoose.Schema(
@@ -25,9 +26,21 @@ const expenseSchema = mongoose.Schema(
       required: [true, "User id is required"],
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
+  }
 );
 
+//pagination
+expenseSchema.plugin(mongoosePaginate);
+
+//instance of expense
 const Expense = mongoose.model("Expense", expenseSchema);
 module.exports = Expense;
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 //schema
 const incomeSchema = mongoose.Schema(
   {
@@ -24,9 +25,21 @@ const incomeSchema = mongoose.Schema(
       required: [true, "User id is required"],
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
+  }
 );
 
+//pagination
+incomeSchema.plugin(mongoosePaginate);
+
+//instance of Income
 const Income = mongoose.model("Income", incomeSchema);
 module.exports = Income;
 
