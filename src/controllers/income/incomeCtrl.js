@@ -17,7 +17,6 @@ const createIncCtrl = expressAsyncHandler(async (req, res) => {
     res.json(error);
   }
 });
-
 //fetch all income
 const fetchIncCtrl = expressAsyncHandler(async (req, res) => {
   const { page } = req.query; //taking page number as a query parameter i.e anything after ? =>api/income?page=3
